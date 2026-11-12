@@ -221,3 +221,40 @@ button:active {
         height: 320px;
     }
 }
+
+/* =========================================
+   UI ANIMATIONS & INTERACTIONS
+========================================= */
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.search-box, 
+.availability-box, 
+.map-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.search-box:hover, 
+.availability-box:hover, 
+.map-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    border-color: rgba(45, 212, 191, 0.3);
+}
+
+select, input[type="text"], input[type="time"] {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
