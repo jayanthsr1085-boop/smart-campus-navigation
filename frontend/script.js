@@ -599,24 +599,3 @@ function switchTab(tabId) {
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-// =====================================
-// 17. 3D TILT CARD INTERACTION EFFECT
-// =====================================
-
-document.querySelectorAll('.search-box, .availability-box, .map-container').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        
-        const rotateX = (-y / 15);
-        const rotateY = (x / 15);
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-    });
-});
