@@ -103,7 +103,7 @@ const campusLocations = [
 
 let databaseLocations = [];
 let allRooms = [];
-let timetableData = null; // New variable for timetable
+let timetableData = null; 
 
 const locationMarkers = new Map();
 let campusGraph = null;
@@ -181,41 +181,26 @@ campusLocations.forEach(function(location) {
 
 });
 
-console.log("All 13 original campus markers added.");
-
 
 // =====================================
 // 8. LOAD LOCATIONS FROM MONGODB
 // =====================================
 
 async function loadLocations() {
-
     try {
-
-        const response = await fetch(
-            `${API_BASE}/locations`
-        );
-
-        if (!response.ok) {
-            throw new Error("Unable to fetch locations");
-        }
-
+        const response = await fetch(`${API_BASE}/locations`);
+        if (!response.ok) throw new Error("Unable to fetch locations");
         const responseData = await response.json();
-
-        if (responseData.status !== "success") {
-            throw new Error("Locations API error");
-        }
+        if (responseData.status !== "success") throw new Error("Locations API error");
 
         databaseLocations = responseData.data;
-
-        // Populate dropdown using MongoDB records
 
         startLocation.innerHTML = '<option value="">Select starting location</option>';
         endLocation.innerHTML = '<option value="">Select destination</option>';
 
         databaseLocations.forEach(function(location) {
             const startOption = document.createElement("option");
-            startOption.value = location.name; // Use the actual name for the graph
+            startOption.value = location.name;
             startOption.textContent = location.name;
             startLocation.appendChild(startOption);
 
@@ -224,23 +209,10 @@ async function loadLocations() {
             endOption.textContent = location.name;
             endLocation.appendChild(endOption);
         });
-
-        console.log(
-            "MongoDB locations loaded:",
-            databaseLocations
-        );
-
-    }
-
-    catch (error) {
-
+    } catch (error) {
         console.error("Location loading error:", error);
-
-        result.textContent =
-            "Unable to load database locations.";
-
+        result.textContent = "Unable to load database locations.";
     }
-
 }
 
 
@@ -249,9 +221,7 @@ async function loadLocations() {
 // =====================================
 
 function findMapLocation(databaseName) {
-
     const name = databaseName.toLowerCase();
-
     const aliases = {
         "central library": "Library",
         "college canteen": "Canteen"
@@ -264,18 +234,14 @@ function findMapLocation(databaseName) {
     }
 
     return campusLocations.find(function(location) {
-
         return location.name.toLowerCase() === name;
-
     });
-
 }
 
 // =====================================
 // 10. A* PATHFINDING ALGORITHM
 // =====================================
 
-// Helper function to calculate straight-line distance (Heuristic)
 function heuristic(nodeA, nodeB) {
     const locA = campusLocations.find(l => l.name === nodeA);
     const locB = campusLocations.find(l => l.name === nodeB);
@@ -302,7 +268,6 @@ navigateButton.addEventListener("click", function() {
         return;
     }
 
-    // A* Algorithm Initialization
     let openSet = [start];
     let cameFrom = {};
     let gScore = {};
@@ -316,9 +281,7 @@ navigateButton.addEventListener("click", function() {
     gScore[start] = 0;
     fScore[start] = heuristic(start, goal);
 
-    // A* Loop
     while (openSet.length > 0) {
-        // Find node with lowest fScore
         let current = openSet[0];
         let lowestF = fScore[current];
         for (let i = 1; i < openSet.length; i++) {
@@ -328,7 +291,6 @@ navigateButton.addEventListener("click", function() {
             }
         }
 
-        // If we reached the destination
         if (current === goal) {
             let path = [current];
             let totalDistance = gScore[current];
@@ -364,22 +326,17 @@ navigateButton.addEventListener("click", function() {
 });
 
 function drawPathOnMap(pathArray, distance) {
-    // Clear previous route if it exists
     if (currentRouteLine) {
         map.removeLayer(currentRouteLine);
     }
 
-    // Get coordinates for the path
     let latlngs = [];
     pathArray.forEach(nodeName => {
         let loc = campusLocations.find(l => l.name === nodeName);
         if (loc) latlngs.push([loc.lat, loc.lng]);
     });
 
-    // Draw the line on the map
     currentRouteLine = L.polyline(latlngs, {color: '#dc2626', weight: 5, opacity: 0.8}).addTo(map);
-    
-    // Zoom map to fit the route
     map.fitBounds(currentRouteLine.getBounds(), { padding: [30, 30] });
 
     result.innerHTML = `
@@ -395,41 +352,20 @@ function drawPathOnMap(pathArray, distance) {
 // =====================================
 
 async function loadRooms() {
-
     try {
-
-        const response = await fetch(
-            `${API_BASE}/rooms`
-        );
-
-        if (!response.ok) {
-            throw new Error("Unable to fetch rooms");
-        }
-
+        const response = await fetch(`${API_BASE}/rooms`);
+        if (!response.ok) throw new Error("Unable to fetch rooms");
         const responseData = await response.json();
-
-        if (responseData.status !== "success") {
-            throw new Error("Rooms API error");
-        }
+        if (responseData.status !== "success") throw new Error("Rooms API error");
 
         allRooms = responseData.data;
-
         roomType.disabled = false;
-
-        console.log("MongoDB rooms loaded:", allRooms);
-
-    }
-
-    catch (error) {
-
+    } catch (error) {
         console.error("Room loading error:", error);
-
-        availabilityResult.innerHTML =
-            "<p>Unable to load rooms. Check backend connection.</p>";
-
+        availabilityResult.innerHTML = "<p>Unable to load rooms. Check backend connection.</p>";
     }
-
 }
+
 // =====================================
 // 11.5 LOAD TIMETABLE FROM BACKEND
 // =====================================
@@ -437,20 +373,11 @@ async function loadRooms() {
 async function loadTimetable() {
     try {
         const response = await fetch(`${API_BASE}/timetable`);
-
-        if (!response.ok) {
-            throw new Error("Unable to fetch timetable");
-        }
-
+        if (!response.ok) throw new Error("Unable to fetch timetable");
         const responseData = await response.json();
-
-        if (responseData.status !== "success") {
-            throw new Error("Timetable API error");
-        }
+        if (responseData.status !== "success") throw new Error("Timetable API error");
 
         timetableData = responseData.data;
-        console.log("Timetable loaded successfully:", timetableData);
-
     } catch (error) {
         console.error("Timetable loading error:", error);
     }
@@ -461,60 +388,36 @@ async function loadTimetable() {
 // =====================================
 
 roomType.addEventListener("change", function() {
-
     const selectedType = roomType.value;
-
-    roomSelect.innerHTML =
-        '<option value="">Select a room</option>';
-
+    roomSelect.innerHTML = '<option value="">Select a room</option>';
     roomSelect.disabled = true;
-
     customRoom.value = "";
+    availabilityResult.innerHTML = "<p>Choose a room, day and time to continue.</p>";
 
-    availabilityResult.innerHTML =
-        "<p>Choose a room, day and time to continue.</p>";
+    if (selectedType === "") return;
 
-    if (selectedType === "") {
-        return;
-    }
-
-    const filteredRooms = allRooms.filter(function(room) {
-
-        return room.type === selectedType;
-
-    });
+    const filteredRooms = allRooms.filter(room => room.type === selectedType);
 
     if (filteredRooms.length === 0) {
-
-        availabilityResult.innerHTML =
-            "<p>No rooms found for this room type.</p>";
-
+        availabilityResult.innerHTML = "<p>No rooms found for this room type.</p>";
         return;
-
     }
 
-    filteredRooms.forEach(function(room) {
-
+    filteredRooms.forEach(room => {
         const option = document.createElement("option");
-
         option.value = room.roomNumber;
-
-        option.textContent =
-            room.roomNumber + " - " + room.name;
-
+        option.textContent = room.roomNumber + " - " + room.name;
         roomSelect.appendChild(option);
-
     });
 
     roomSelect.disabled = false;
-
 });
+
 // =====================================
 // 13. CHECK ROOM AVAILABILITY
 // =====================================
 
 checkAvailabilityButton.addEventListener("click", function() {
-
     const selectedType = roomType.value;
     const selectedRoom = customRoom.value.trim() || roomSelect.value;
     const selectedSection = sectionSelect.value;
@@ -532,35 +435,24 @@ checkAvailabilityButton.addEventListener("click", function() {
         return;
     }
 
-    const roomDetails = allRooms.find(function(room) {
-        return room.roomNumber.toLowerCase() === selectedRoom.toLowerCase();
-    });
+    const roomDetails = allRooms.find(room => room.roomNumber.toLowerCase() === selectedRoom.toLowerCase());
 
     let isOccupied = false;
     let occupiedMessage = "";
-
-    // 1. Loop through all sections in the timetable
     const sections = timetableData.sections;
     
     for (const secKey in sections) {
         const sectionData = sections[secKey];
-        
-        // 2. Check if the section has classes on the selected day
         if (sectionData.schedule && sectionData.schedule[selectedDay]) {
             const daySchedule = sectionData.schedule[selectedDay];
-            
-            // 3. Find the exact time slot (e.g., "09:00" or "13:45")
             const timeSlot = daySchedule[selectedTime]; 
 
             if (timeSlot) {
-                // 4. Check if it's a theory class occupying our selected room
                 if (timeSlot.type === "theory" && timeSlot.room === selectedRoom) {
                     isOccupied = true;
                     occupiedMessage = `Occupied by Section ${secKey} (Theory: ${timeSlot.subject})`;
                     break;
-                } 
-                // 5. Check if it's a lab batch occupying our selected room
-                else if (timeSlot.type === "lab" && timeSlot.batches) {
+                } else if (timeSlot.type === "lab" && timeSlot.batches) {
                     for (const batchKey in timeSlot.batches) {
                         if (timeSlot.batches[batchKey] === selectedRoom) {
                             isOccupied = true;
@@ -574,7 +466,6 @@ checkAvailabilityButton.addEventListener("click", function() {
         if (isOccupied) break;
     }
 
-    // 6. Output the final HTML based on the status
     const statusHtml = isOccupied 
         ? `<strong style="color: #dc2626; font-size: 1.3em;">OCCUPIED</strong><br><span style="color: #475569;">${occupiedMessage}</span>` 
         : `<strong style="color: #16a34a; font-size: 1.3em;">FREE</strong><br><span style="color: #475569;">No classes are scheduled to start at this exact time.</span>`;
@@ -584,14 +475,13 @@ checkAvailabilityButton.addEventListener("click", function() {
             <h3 style="margin-top: 0;">Status</h3>
             ${statusHtml}
         </div>
-
         <h3>Selection Details</h3>
         <p><strong>Room:</strong> ${escapeHTML(selectedRoom)} (${escapeHTML(roomDetails?.name || "Unknown")})</p>
         <p><strong>Your Profile:</strong> Section ${escapeHTML(selectedSection || "None")} | Batch ${escapeHTML(selectedBatch || "None")}</p>
         <p><strong>Checked for:</strong> ${escapeHTML(selectedDay)} at ${escapeHTML(selectedTime)}</p>
     `;
-
 });
+
 // =====================================
 // 13.5 LOAD CAMPUS GRAPH
 // =====================================
@@ -602,19 +492,19 @@ async function loadGraph() {
         const responseData = await response.json();
         if (responseData.status === "success") {
             campusGraph = responseData.data;
-            console.log("Graph loaded:", campusGraph);
         }
     } catch (error) {
         console.error("Graph loading error:", error);
     }
 }
+
 // =====================================
 // 14. START FRONTEND
 // =====================================
 
 loadLocations();
 loadRooms();
-loadTimetable(); // Added this line
+loadTimetable();
 loadGraph();
 
 // =====================================
@@ -633,22 +523,17 @@ locateMeBtn.addEventListener("click", function() {
 
     alert("Requesting GPS access. Please click 'Allow' on your phone.");
 
-    // watchPosition continuously updates as the user walks
     navigator.geolocation.watchPosition(
         function(position) {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            const accuracy = position.coords.accuracy; // How accurate the GPS is right now
+            const accuracy = position.coords.accuracy;
 
             if (userMarker) {
-                // If the blue dot already exists, just move it to the new step
                 userMarker.setLatLng([lat, lng]);
                 userCircle.setLatLng([lat, lng]);
                 userCircle.setRadius(accuracy);
             } else {
-                // First time finding the user: Create the blue dot!
-                
-                // The light blue radius showing accuracy
                 userCircle = L.circle([lat, lng], {
                     color: '#3b82f6',
                     fillColor: '#3b82f6',
@@ -657,7 +542,6 @@ locateMeBtn.addEventListener("click", function() {
                     weight: 1
                 }).addTo(map);
 
-                // The solid blue dot for the exact location
                 userMarker = L.circleMarker([lat, lng], {
                     color: '#ffffff',
                     fillColor: '#3b82f6',
@@ -666,18 +550,73 @@ locateMeBtn.addEventListener("click", function() {
                     weight: 2
                 }).addTo(map);
 
-                // Instantly zoom the map to where the user is standing
                 map.setView([lat, lng], 18);
             }
         },
         function(error) {
             console.error("GPS Error:", error);
-            alert("Unable to find you. Please make sure Location Services/GPS is turned on in your phone settings.");
+            alert("Unable to find you. Please make sure Location Services/GPS is turned on.");
         },
         { 
-            enableHighAccuracy: true, // Forces the phone to use real GPS, not just WiFi estimation
+            enableHighAccuracy: true,
             maximumAge: 0,
             timeout: 10000 
         }
     );
+});
+
+// =====================================
+// 16. TAB SWITCHER FUNCTION
+// =====================================
+
+function switchTab(tabId) {
+    console.log("Switching to tab:", tabId);
+    
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+        tab.style.display = 'none'; // Force hide
+    });
+    
+    // Remove active class from all buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Show the selected tab
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.add('active');
+        targetTab.style.display = 'block'; // Force show
+    } else {
+        console.error("Tab not found:", tabId);
+    }
+    
+    // Highlight clicked button
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// =====================================
+// 17. 3D TILT CARD INTERACTION EFFECT
+// =====================================
+
+document.querySelectorAll('.search-box, .availability-box, .map-container').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const rotateX = (-y / 15);
+        const rotateY = (x / 15);
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+    });
 });
