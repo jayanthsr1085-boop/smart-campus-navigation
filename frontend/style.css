@@ -1,16 +1,16 @@
 /* =========================================
-   BASE STYLES & VARIABLES
+   BASE STYLES & VARIABLES (Premium Glassmorphism)
 ========================================= */
 :root {
-    --primary-color: #0d9488; /* Modern teal/green */
-    --primary-hover: #0f766e;
-    --bg-color: #f3f4f6;
-    --card-bg: #ffffff;
-    --text-main: #1f2937;
-    --text-muted: #6b7280;
-    --border-color: #e5e7eb;
-    --radius: 12px;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --primary-color: #2dd4bf; /* Modern vibrant teal */
+    --primary-hover: #14b8a6;
+    --bg-glass: rgba(15, 23, 42, 0.82); /* Dark frosted glass */
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --card-bg: rgba(30, 41, 59, 0.75);
+    --radius: 20px;
+    --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
 }
 
 * {
@@ -20,11 +20,18 @@
 }
 
 body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-color);
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    /* Uses your local campus photo blended with a dark gradient overlay */
+    background: linear-gradient(rgba(2, 6, 23, 0.88), rgba(15, 23, 42, 0.92)), 
+                url('images/campus.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--text-main);
     line-height: 1.5;
-    padding: 20px;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* =========================================
@@ -32,42 +39,59 @@ body {
 ========================================= */
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 2.5rem;
     padding-top: 10px;
+    max-width: 800px;
 }
 
 header h1 {
-    font-size: 2.2rem;
-    color: var(--primary-color);
-    margin-bottom: 5px;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    background: linear-gradient(to right, #2dd4bf, #38bdf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
 }
 
 header p {
     color: var(--text-muted);
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
-/* Card Style for Sections */
+/* Glassmorphism Card Style for Sections */
 .search-box, 
 .availability-box, 
 .map-container {
-    background-color: var(--card-bg);
-    padding: 25px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    margin-bottom: 25px;
+    margin-bottom: 2rem;
+    width: 100%;
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-glass);
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
     color: var(--text-main);
-    border-bottom: 2px solid var(--bg-color);
-    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 0.75rem;
+}
+
+/* Section descriptions */
+.search-box > p,
+.availability-box > p,
+.map-container > p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
 }
 
 /* =========================================
@@ -76,28 +100,36 @@ h2 {
 label {
     display: block;
     font-weight: 600;
-    margin-bottom: 8px;
-    margin-top: 15px;
-    color: var(--text-main);
-    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+    margin-top: 1.2rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 select, input[type="text"], input[type="time"] {
     width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #f9fafb;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background-color: rgba(30, 41, 59, 0.75);
     color: var(--text-main);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.2s ease;
+    outline: none;
 }
 
 select:focus, input[type="text"]:focus, input[type="time"]:focus {
-    outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
-    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+    background-color: rgba(30, 41, 59, 0.95);
+}
+
+optgroup {
+    background: #0f172a;
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
 /* =========================================
@@ -105,44 +137,68 @@ select:focus, input[type="text"]:focus, input[type="time"]:focus {
 ========================================= */
 button {
     width: 100%;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #0d9488, #0f766e);
     color: white;
     border: none;
-    padding: 14px 20px;
-    margin-top: 20px;
-    font-size: 1.1rem;
+    padding: 0.95rem 20px;
+    margin-top: 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
 }
 
 button:hover {
-    background-color: var(--primary-hover);
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(13, 148, 136, 0.5);
 }
 
 button:active {
     transform: scale(0.98);
 }
 
+/* Specific button overrides matching your layout IDs */
+#locateMeBtn {
+    background: #3b82f6 !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+    margin-top: 0.75rem !important;
+}
+
+#locateMeBtn:hover {
+    background: #2563eb !important;
+}
+
+#checkAvailabilityButton {
+    background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+}
+
 /* =========================================
    RESULTS & MAP
 ========================================= */
 #result, #availabilityResult {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f0fdf4;
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background-color: rgba(15, 23, 42, 0.6);
     border-left: 4px solid var(--primary-color);
-    border-radius: 4px 8px 8px 4px;
-    font-size: 1.05rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    border-top: 1px solid var(--border-glass);
+    border-right: 1px solid var(--border-glass);
+    border-bottom: 1px solid var(--border-glass);
 }
 
 #map {
-    height: 450px;
+    height: 400px;
     width: 100%;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    z-index: 1; /* Prevents map dropdowns from overlapping headers */
+    border-radius: 12px;
+    border: 1px solid var(--border-glass);
+    margin-top: 1rem;
+    z-index: 1;
 }
 
 /* =========================================
@@ -154,14 +210,14 @@ button:active {
     }
     
     header h1 {
-        font-size: 1.8rem;
+        font-size: 1.75rem;
     }
     
     .search-box, .availability-box, .map-container {
-        padding: 15px;
+        padding: 1.25rem;
     }
     
     #map {
-        height: 350px;
+        height: 320px;
     }
 }
