@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Campus Navigation | Dr. AIT</title>
+
+    <!-- Google Fonts & Leaflet CSS -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
     <style>
         :root {
             --primary: #0f766e;
             --primary-hover: #115e59;
-            --bg-glass: rgba(15, 23, 42, 0.75);
+            --bg-glass: rgba(15, 23, 42, 0.82);
             --border-glass: rgba(255, 255, 255, 0.12);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --accent-glow: rgba(45, 212, 191, 0.2);
         }
 
         * {
@@ -24,35 +29,23 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(15, 23, 42, 0.90)), 
+            background: linear-gradient(rgba(2, 6, 23, 0.88), rgba(15, 23, 42, 0.92)), 
                         url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1920&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
             color: var(--text-main);
+            padding: 2rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            background: var(--bg-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
-        h1 {
-            font-size: 1.75rem;
+        header h1 {
+            font-size: 2.25rem;
             font-weight: 700;
             letter-spacing: -0.025em;
             background: linear-gradient(to right, #2dd4bf, #38bdf8);
@@ -62,12 +55,41 @@
             margin-bottom: 0.5rem;
         }
 
-        p.subtitle {
-            font-size: 0.9rem;
+        header p {
+            font-size: 1rem;
             color: var(--text-muted);
         }
 
-        .card-section {
+        main {
+            width: 100%;
+            max-width: 720px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        section {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        section h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 0.75rem;
+        }
+
+        section > p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
 
@@ -76,153 +98,206 @@
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        select {
+        select, input[type="text"], input[type="time"] {
             width: 100%;
-            padding: 0.875rem 1rem;
-            background: rgba(30, 41, 59, 0.7);
+            padding: 0.85rem 1rem;
+            background: rgba(30, 41, 59, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 10px;
             color: var(--text-main);
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
             transition: all 0.2s ease;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1rem;
         }
 
-        select:focus {
+        select:focus, input:focus {
             border-color: #2dd4bf;
-            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.15);
+            box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
         button {
             width: 100%;
-            padding: 1rem;
-            border-radius: 12px;
+            padding: 0.95rem;
+            border-radius: 10px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
             border: none;
-            margin-top: 0.5rem;
+            margin-top: 1.25rem;
         }
 
-        .btn-primary {
+        #navigateButton {
             background: linear-gradient(135deg, #0d9488, #0f766e);
             color: white;
-            box-shadow: 0 4px 14px rgba(13, 148, 136, 0.4);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
         }
 
-        .btn-primary:hover {
+        #navigateButton:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.6);
+            box-shadow: 0 6px 16px rgba(13, 148, 136, 0.5);
         }
 
-        .btn-secondary {
-            background: rgba(51, 65, 85, 0.6);
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        #locateMeBtn {
+            background: #3b82f6;
+            color: white;
+            margin-top: 0.75rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
-        .btn-secondary:hover {
-            background: rgba(71, 85, 105, 0.8);
+        #locateMeBtn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
         }
 
-        #result {
-            margin-top: 1.5rem;
+        #checkAvailabilityButton {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        #checkAvailabilityButton:hover {
+            transform: translateY(-1px);
+        }
+
+        #result, #availabilityResult {
+            margin-top: 1.25rem;
             padding: 1rem;
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(15, 23, 42, 0.6);
             border-left: 4px solid #2dd4bf;
             border-radius: 8px;
             font-size: 0.95rem;
-            display: none;
+            color: var(--text-main);
         }
 
-        .section-divider {
-            margin: 2rem 0 1.5rem 0;
-            border: 0;
-            border-top: 1px solid var(--border-glass);
+        #map {
+            width: 100%;
+            height: 380px;
+            border-radius: 12px;
+            margin-top: 1rem;
+            border: 1px solid var(--border-glass);
+            z-index: 1;
+        }
+
+        optgroup {
+            background: #0f172a;
+            color: #2dd4bf;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Smart Campus Navigation</h1>
-            <p class="subtitle">Dr. Ambedkar Institute of Technology</p>
-        </header>
+    <header>
+        <h1>Smart Campus Navigation</h1>
+        <p>Dr. Ambedkar Institute of Technology • Find your destination & check room availability.</p>
+    </header>
 
-        <div class="card-section">
-            <label for="startLocation">Starting Point</label>
+    <main>
+
+       <!-- Campus Location & Route Finder -->
+        <section class="search-box">
+            <h2>Navigate Campus</h2>
+            <p>Select your route parameters across campus buildings.</p>
+
+            <label for="startLocation">Starting Point:</label>
             <select id="startLocation">
-                <option value="Main Gate">Main Gate</option>
-                <option value="Boys Hostel">Boys Hostel</option>
-                <option value="CSE Department">CSE Department</option>
-                <option value="Library">Library</option>
+                <option value="">Select starting location</option>
             </select>
-        </div>
 
-        <div class="card-section">
-            <label for="endLocation">Destination</label>
+            <label for="endLocation">Destination:</label>
             <select id="endLocation">
-                <option value="Boys Hostel">Boys Hostel</option>
-                <option value="Main Gate">Main Gate</option>
-                <option value="CSE Department">CSE Department</option>
-                <option value="Library">Library</option>
+                <option value="">Select destination</option>
             </select>
-        </div>
 
-        <button class="btn-primary" id="navigateButton">Find Route</button>
-        <button class="btn-secondary" id="locationButton">📍 Show My Live Location</button>
+            <button id="navigateButton">Find Route</button>
+            <button id="locateMeBtn">📍 Show My Live Location</button>
 
-        <div id="result"></div>
+            <div id="result">
+                <p>Your route details will appear here.</p>
+            </div>
+        </section>
 
-        <hr class="section-divider">
+        <!-- Class and Lab Availability -->
+        <section class="availability-box">
+            <h2>Class/Lab Availability</h2>
+            <p>Select a classroom or laboratory to check its real-time schedule.</p>
 
-        <header style="margin-bottom: 1rem;">
-            <h2 style="font-size: 1.25rem; font-weight: 600; color: #f8fafc;">Class/Lab Availability</h2>
-        </header>
-        <div class="card-section">
+            <label for="roomType">Select Room Type:</label>
             <select id="roomType">
-                <option value="">Select a classroom or laboratory...</option>
-                <option value="Lab 1">Computer Lab 1</option>
-                <option value="Lab 2">Computer Lab 2</option>
+                <option value="">Select room type</option>
+                <option value="Classroom">Classroom</option>
+                <option value="Laboratory">Laboratory</option>
             </select>
-        </div>
-    </div>
 
-    <script>
-        const API_BASE = "https://smart-campus-backend-liew.onrender.com/api";
+            <label for="roomSelect">Select Room Number:</label>
+            <select id="roomSelect" disabled>
+                <option value="">Select a room</option>
+            </select>
 
-        document.getElementById('navigateButton').addEventListener('click', async () => {
-            const start = document.getElementById('startLocation').value;
-            const end = document.getElementById('endLocation').value;
-            const resultDiv = document.getElementById('result');
-            
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = 'Calculating optimal path...';
+            <label for="customRoom">Or enter room number manually:</label>
+            <input type="text" id="customRoom" placeholder="Example: C326">
 
-            try {
-                const response = await fetch(`${API_BASE}/route?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`);
-                const data = await response.json();
-                if(data.success || data.path) {
-                    resultDiv.innerHTML = `<strong>Route Found:</strong> ${data.path ? data.path.join(' ➔ ') : 'Path generated successfully.'}`;
-                } else {
-                    resultDiv.innerHTML = 'Pathfinding data for these locations is incomplete.';
-                }
-            } catch (err) {
-                resultDiv.innerHTML = 'Connected to server successfully. Ready for navigation.';
-            }
-        });
-    </script>
+            <label for="sectionSelect">Select Section (CSE 5th Sem):</label>
+            <select id="sectionSelect">
+                <option value="">Select Section</option>
+                <option value="A">Section A</option>
+                <option value="B">Section B</option>
+                <option value="C">Section C</option>
+                <option value="D">Section D</option>
+            </select>
+
+            <label for="batchSelect">Select Lab Batch (For Labs Only):</label>
+            <select id="batchSelect">
+                <option value="">Select Batch (or leave empty for theory)</option>
+                <optgroup label="Section A">
+                    <option value="A1">A1</option><option value="A2">A2</option><option value="A3">A3</option><option value="A4">A4</option><option value="A5">A5</option><option value="A6">A6</option>
+                </optgroup>
+                <optgroup label="Section B">
+                    <option value="B1">B1</option><option value="B2">B2</option><option value="B3">B3</option><option value="B4">B4</option><option value="B5">B5</option><option value="B6">B6</option>
+                </optgroup>
+                <optgroup label="Section C">
+                    <option value="C1">C1</option><option value="C2">C2</option><option value="C3">C3</option><option value="C4">C4</option><option value="C5">C5</option><option value="C6">C6</option>
+                </optgroup>
+                <optgroup label="Section D">
+                    <option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="D4">D4</option><option value="D5">D5</option><option value="D6">D6</option>
+                </optgroup>
+            </select>
+
+            <label for="availabilityDay">Select Day:</label>
+            <select id="availabilityDay">
+                <option value="">Select day</option>
+                <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option>
+            </select>
+
+            <label for="availabilityTime">Select Time:</label>
+            <input type="time" id="availabilityTime">
+
+            <button id="checkAvailabilityButton">Check Availability</button>
+
+            <div id="availabilityResult">
+                <p>Room availability information will appear here.</p>
+            </div>
+        </section>
+
+        <!-- Campus Map -->
+        <section class="map-container">
+            <h2>Campus Map</h2>
+            <p>Explore interactive nodes and routes within Dr. AIT campus.</p>
+            <div id="map"></div>
+        </section>
+
+    </main>
+
+    <!-- Leaflet & App Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
