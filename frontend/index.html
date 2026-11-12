@@ -14,6 +14,15 @@
 </head>
 <body>
 
+    <!-- Sleek Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-brand">Dr. AIT Smart Campus</div>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="switchTab('map-section-view')">🗺️ Campus Navigation</button>
+            <button class="nav-btn" onclick="switchTab('availability-section-view')">📅 Room Availability</button>
+        </div>
+    </nav>
+
     <header>
         <h1>Smart Campus Navigation</h1>
         <p>Dr. Ambedkar Institute of Technology • Find your destination & check room availability.</p>
@@ -21,103 +30,121 @@
 
     <main>
 
-       <!-- Campus Location & Route Finder -->
-        <section class="search-box">
-            <h2>Navigate Campus</h2>
-            <p>Select your route parameters across campus buildings.</p>
+       <!-- TAB 1: Campus Navigation & Map View -->
+       <div id="map-section-view" class="tab-content active">
+           <section class="search-box">
+               <h2>Navigate Campus</h2>
+               <p>Select your route parameters across campus buildings.</p>
 
-            <label for="startLocation">Starting Point:</label>
-            <select id="startLocation">
-                <option value="">Select starting location</option>
-            </select>
+               <label for="startLocation">Starting Point:</label>
+               <select id="startLocation">
+                   <option value="">Select starting location</option>
+               </select>
 
-            <label for="endLocation">Destination:</label>
-            <select id="endLocation">
-                <option value="">Select destination</option>
-            </select>
+               <label for="endLocation">Destination:</label>
+               <select id="endLocation">
+                   <option value="">Select destination</option>
+               </select>
 
-            <button id="navigateButton">Find Route</button>
-            <button id="locateMeBtn">📍 Show My Live Location</button>
+               <button id="navigateButton">Find Route</button>
+               <button id="locateMeBtn">📍 Show My Live Location</button>
 
-            <div id="result">
-                <p>Your route details will appear here.</p>
-            </div>
-        </section>
+               <div id="result">
+                   <p>Your route details will appear here.</p>
+               </div>
+           </section>
 
-        <!-- Class and Lab Availability -->
-        <section class="availability-box">
-            <h2>Class/Lab Availability</h2>
-            <p>Select a classroom or laboratory to check its real-time schedule.</p>
+           <section class="map-container" style="margin-top: 2rem;">
+               <h2>Campus Map</h2>
+               <p>Explore interactive nodes and routes within Dr. AIT campus.</p>
+               <div id="map"></div>
+           </section>
+       </div>
 
-            <label for="roomType">Select Room Type:</label>
-            <select id="roomType">
-                <option value="">Select room type</option>
-                <option value="Classroom">Classroom</option>
-                <option value="Laboratory">Laboratory</option>
-            </select>
+        <!-- TAB 2: Class and Lab Availability View -->
+        <div id="availability-section-view" class="tab-content">
+            <section class="availability-box">
+                <h2>Class/Lab Availability</h2>
+                <p>Select a classroom or laboratory to check its real-time schedule.</p>
 
-            <label for="roomSelect">Select Room Number:</label>
-            <select id="roomSelect" disabled>
-                <option value="">Select a room</option>
-            </select>
+                <label for="roomType">Select Room Type:</label>
+                <select id="roomType">
+                    <option value="">Select room type</option>
+                    <option value="Classroom">Classroom</option>
+                    <option value="Laboratory">Laboratory</option>
+                </select>
 
-            <label for="customRoom">Or enter room number manually:</label>
-            <input type="text" id="customRoom" placeholder="Example: C326">
+                <label for="roomSelect">Select Room Number:</label>
+                <select id="roomSelect" disabled>
+                    <option value="">Select a room</option>
+                </select>
 
-            <label for="sectionSelect">Select Section (CSE 5th Sem):</label>
-            <select id="sectionSelect">
-                <option value="">Select Section</option>
-                <option value="A">Section A</option>
-                <option value="B">Section B</option>
-                <option value="C">Section C</option>
-                <option value="D">Section D</option>
-            </select>
+                <label for="customRoom">Or enter room number manually:</label>
+                <input type="text" id="customRoom" placeholder="Example: C326">
 
-            <label for="batchSelect">Select Lab Batch (For Labs Only):</label>
-            <select id="batchSelect">
-                <option value="">Select Batch (or leave empty for theory)</option>
-                <optgroup label="Section A">
-                    <option value="A1">A1</option><option value="A2">A2</option><option value="A3">A3</option><option value="A4">A4</option><option value="A5">A5</option><option value="A6">A6</option>
-                </optgroup>
-                <optgroup label="Section B">
-                    <option value="B1">B1</option><option value="B2">B2</option><option value="B3">B3</option><option value="B4">B4</option><option value="B5">B5</option><option value="B6">B6</option>
-                </optgroup>
-                <optgroup label="Section C">
-                    <option value="C1">C1</option><option value="C2">C2</option><option value="C3">C3</option><option value="C4">C4</option><option value="C5">C5</option><option value="C6">C6</option>
-                </optgroup>
-                <optgroup label="Section D">
-                    <option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="D4">D4</option><option value="D5">D5</option><option value="D6">D6</option>
-                </optgroup>
-            </select>
+                <label for="sectionSelect">Select Section (CSE 5th Sem):</label>
+                <select id="sectionSelect">
+                    <option value="">Select Section</option>
+                    <option value="A">Section A</option>
+                    <option value="B">Section B</option>
+                    <option value="C">Section C</option>
+                    <option value="D">Section D</option>
+                </select>
 
-            <label for="availabilityDay">Select Day:</label>
-            <select id="availabilityDay">
-                <option value="">Select day</option>
-                <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option>
-            </select>
+                <label for="batchSelect">Select Lab Batch (For Labs Only):</label>
+                <select id="batchSelect">
+                    <option value="">Select Batch (or leave empty for theory)</option>
+                    <optgroup label="Section A">
+                        <option value="A1">A1</option><option value="A2">A2</option><option value="A3">A3</option><option value="A4">A4</option><option value="A5">A5</option><option value="A6">A6</option>
+                    </optgroup>
+                    <optgroup label="Section B">
+                        <option value="B1">B1</option><option value="B2">B2</option><option value="B3">B3</option><option value="B4">B4</option><option value="B5">B5</option><option value="B6">B6</option>
+                    </optgroup>
+                    <optgroup label="Section C">
+                        <option value="C1">C1</option><option value="C2">C2</option><option value="C3">C3</option><option value="C4">C4</option><option value="C5">C5</option><option value="C6">C6</option>
+                    </optgroup>
+                    <optgroup label="Section D">
+                        <option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="D4">D4</option><option value="D5">D5</option><option value="D6">D6</option>
+                    </optgroup>
+                </select>
 
-            <label for="availabilityTime">Select Time:</label>
-            <input type="time" id="availabilityTime">
+                <label for="availabilityDay">Select Day:</label>
+                <select id="availabilityDay">
+                    <option value="">Select day</option>
+                    <option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option>
+                </select>
 
-            <button id="checkAvailabilityButton">Check Availability</button>
+                <label for="availabilityTime">Select Time:</label>
+                <input type="time" id="availabilityTime">
 
-            <div id="availabilityResult">
-                <p>Room availability information will appear here.</p>
-            </div>
-        </section>
+                <button id="checkAvailabilityButton">Check Availability</button>
 
-        <!-- Campus Map -->
-        <section class="map-container">
-            <h2>Campus Map</h2>
-            <p>Explore interactive nodes and routes within Dr. AIT campus.</p>
-            <div id="map"></div>
-        </section>
+                <div id="availabilityResult">
+                    <p>Room availability information will appear here.</p>
+                </div>
+            </section>
+        </div>
 
     </main>
 
     <!-- Leaflet & App Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
+
+    <!-- Tiny Tab Switcher Script -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
