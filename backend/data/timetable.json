@@ -1,0 +1,244 @@
+{
+  "college": "Dr. Ambedkar Institute of Technology",
+  "semester": 5,
+  "department": "CSE",
+  "effectiveFrom": "2026-09-08",
+
+  "timeSlots": [
+    { "id": 1, "start": "09:00", "end": "09:55" },
+    { "id": 2, "start": "09:55", "end": "10:50" },
+    { "id": 3, "start": "11:10", "end": "12:05" },
+    { "id": 4, "start": "12:05", "end": "13:00" },
+    { "id": 5, "start": "13:45", "end": "14:40" },
+    { "id": 6, "start": "14:40", "end": "15:35" },
+    { "id": 7, "start": "15:35", "end": "16:30" }
+  ],
+
+  "breaks": [
+    { "name": "Tea Break", "start": "10:50", "end": "11:10" },
+    { "name": "Lunch Break", "start": "13:00", "end": "13:45" }
+  ],
+
+  "sections": {
+    "A": {
+      "classroom": "C326",
+      "schedule": {
+        "Monday": {
+          "09:00": { "type": "lab", "batches": { "A1": "C117", "A2": "C108" } },
+          "09:55": { "type": "lab", "batches": { "A1": "C117", "A2": "C108" } },
+          "11:10": { "type": "theory", "subject": "M&E", "room": "C326" },
+          "12:05": { "type": "theory", "subject": "CN", "room": "C326" },
+          "13:45": { "type": "theory", "subject": "RMIPR", "room": "C326" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C326" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C326" }
+        },
+        "Tuesday": {
+          "09:00": { "type": "theory", "subject": "Mini Project", "room": "C326" },
+          "09:55": { "type": "theory", "subject": "EVS", "room": "C326" },
+          "11:10": { "type": "lab", "batches": { "A3": "C117", "A4": "C108" } },
+          "12:05": { "type": "lab", "batches": { "A3": "C117", "A4": "C108" } },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C326" },
+          "14:40": { "type": "theory", "subject": "CN", "room": "C326" }
+        },
+        "Wednesday": {
+          "09:00": { "type": "lab", "batches": { "A1": "C108", "A2": "C117" } },
+          "09:55": { "type": "lab", "batches": { "A1": "C108", "A2": "C117" } },
+          "11:10": { "type": "theory", "subject": "CGIP", "room": "C326" },
+          "12:05": { "type": "theory", "subject": "CN", "room": "C326" },
+          "13:45": { "type": "theory", "subject": "CDN", "room": "C326" },
+          "14:40": { "type": "theory", "subject": "CDN", "room": "C326" },
+          "15:35": { "type": "theory", "subject": "JAVA/UNIX", "room": "C326" }
+        },
+        "Thursday": {
+          "09:00": { "type": "theory", "subject": "CN", "room": "C326" },
+          "09:55": { "type": "theory", "subject": "CGIP", "room": "C326" },
+          "11:10": { "type": "theory", "subject": "M&E", "room": "C326" },
+          "12:05": { "type": "theory", "subject": "RMIPR", "room": "C326" },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C326" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C326" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C326" }
+        },
+        "Friday": {
+          "09:00": { "type": "lab", "batches": { "A3": "C108", "A4": "C117" } },
+          "09:55": { "type": "lab", "batches": { "A3": "C108", "A4": "C117" } },
+          "11:10": { "type": "theory", "subject": "RMIPR", "room": "C326" },
+          "12:05": { "type": "theory", "subject": "M&E", "room": "C326" },
+          "13:45": { "type": "theory", "subject": "RMIPR", "room": "C326" },
+          "14:40": { "type": "theory", "subject": "CGIP", "room": "C326" },
+          "15:35": { "type": "theory", "subject": "EVS", "room": "C326" }
+        },
+        "Saturday": {
+          "09:00": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C326" },
+          "09:55": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C326" },
+          "11:10": { "type": "theory", "subject": "Mini Project", "room": "C326" },
+          "12:05": { "type": "theory", "subject": "Mini Project", "room": "C326" }
+        }
+      }
+    },
+    "B": {
+      "classroom": "C110",
+      "schedule": {
+        "Monday": {
+          "09:00": { "type": "theory", "subject": "Mini Project", "room": "C110" },
+          "09:55": { "type": "theory", "subject": "CN", "room": "C110" },
+          "11:10": { "type": "theory", "subject": "CGIP", "room": "C110" },
+          "12:05": { "type": "theory", "subject": "RMIPR", "room": "C110" },
+          "13:45": { "type": "theory", "subject": "M&E", "room": "C110" },
+          "14:40": { "type": "lab", "batches": { "B1": "C108", "B3": "C117" } },
+          "15:35": { "type": "lab", "batches": { "B1": "C108", "B3": "C117" } }
+        },
+        "Tuesday": {
+          "09:00": { "type": "lab", "batches": { "B1": "C117", "B2": "C108" } },
+          "09:55": { "type": "lab", "batches": { "B1": "C117", "B2": "C108" } },
+          "11:10": { "type": "theory", "subject": "CN", "room": "C110" },
+          "12:05": { "type": "theory", "subject": "EVS", "room": "C110" },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C110" },
+          "14:40": { "type": "lab", "batches": { "B2": "C117", "B3": "C108" } },
+          "15:35": { "type": "lab", "batches": { "B2": "C117", "B3": "C108" } }
+        },
+        "Wednesday": {
+          "09:00": { "type": "theory", "subject": "CDN", "room": "C110" },
+          "09:55": { "type": "theory", "subject": "CDN", "room": "C110" },
+          "11:10": { "type": "theory", "subject": "RMIPR", "room": "C110" },
+          "12:05": { "type": "theory", "subject": "M&E", "room": "C110" },
+          "13:45": { "type": "theory", "subject": "CN", "room": "C110" },
+          "14:40": { "type": "theory", "subject": "CGIP", "room": "C110" },
+          "15:35": { "type": "theory", "subject": "JAVA/UNIX", "room": "C110" }
+        },
+        "Thursday": {
+          "09:00": { "type": "theory", "subject": "M&E", "room": "C110" },
+          "09:55": { "type": "theory", "subject": "RMIPR", "room": "C110" },
+          "11:10": { "type": "theory", "subject": "CN", "room": "C110" },
+          "12:05": { "type": "theory", "subject": "CGIP", "room": "C110" },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C110" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C110" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C110" }
+        },
+        "Friday": {
+          "09:00": { "type": "theory", "subject": "RMIPR", "room": "C110" },
+          "09:55": { "type": "theory", "subject": "EVS", "room": "C110" },
+          "11:10": { "type": "theory", "subject": "Mini Project", "room": "C110" },
+          "12:05": { "type": "theory", "subject": "Mini Project", "room": "C110" },
+          "13:45": { "type": "theory", "subject": "Mini Project", "room": "C110" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C110" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C110" }
+        },
+        "Saturday": {
+          "09:00": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C110" },
+          "09:55": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C110" }
+        }
+      }
+    },
+    "C": {
+      "classroom": "C107",
+      "schedule": {
+        "Monday": {
+          "09:00": { "type": "theory", "subject": "M&E", "room": "C107" },
+          "09:55": { "type": "theory", "subject": "RMIPR", "room": "C107" },
+          "11:10": { "type": "lab", "batches": { "C1": "C117", "C2": "C108" } },
+          "12:05": { "type": "lab", "batches": { "C1": "C117", "C2": "C108" } },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C107" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C107" }
+        },
+        "Tuesday": {
+          "09:00": { "type": "theory", "subject": "CGIP", "room": "C107" },
+          "09:55": { "type": "theory", "subject": "EVS", "room": "C107" },
+          "11:10": { "type": "theory", "subject": "CN", "room": "C107" },
+          "12:05": { "type": "theory", "subject": "CGIP", "room": "C107" },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C107" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C107" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C107" }
+        },
+        "Wednesday": {
+          "09:00": { "type": "theory", "subject": "CDN", "room": "C107" },
+          "09:55": { "type": "theory", "subject": "CDN", "room": "C107" },
+          "11:10": { "type": "lab", "batches": { "C1": "C108", "C3": "C117" } },
+          "12:05": { "type": "lab", "batches": { "C1": "C108", "C3": "C117" } },
+          "13:45": { "type": "theory", "subject": "CN", "room": "C107" },
+          "14:40": { "type": "theory", "subject": "RMIPR", "room": "C107" },
+          "15:35": { "type": "theory", "subject": "JAVA/UNIX", "room": "C107" }
+        },
+        "Thursday": {
+          "09:00": { "type": "lab", "batches": { "C2": "C117", "C3": "C108" } },
+          "09:55": { "type": "lab", "batches": { "C2": "C117", "C3": "C108" } },
+          "11:10": { "type": "theory", "subject": "CN", "room": "C107" },
+          "12:05": { "type": "theory", "subject": "Mini Project", "room": "C107" },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C107" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C107" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C107" }
+        },
+        "Friday": {
+          "09:00": { "type": "theory", "subject": "M&E", "room": "C107" },
+          "09:55": { "type": "theory", "subject": "CGIP", "room": "C107" },
+          "11:10": { "type": "theory", "subject": "RMIPR", "room": "C107" },
+          "12:05": { "type": "theory", "subject": "RMIPR", "room": "C107" },
+          "13:45": { "type": "theory", "subject": "CN", "room": "C107" },
+          "14:40": { "type": "theory", "subject": "M&E", "room": "C107" },
+          "15:35": { "type": "theory", "subject": "EVS", "room": "C107" }
+        },
+        "Saturday": {
+          "09:00": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C107" },
+          "09:55": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C107" }
+        }
+      }
+    },
+    "D": {
+      "classroom": "C116",
+      "schedule": {
+        "Monday": {
+          "09:00": { "type": "theory", "subject": "Mini Project", "room": "C116" },
+          "09:55": { "type": "theory", "subject": "M&E", "room": "C116" },
+          "11:10": { "type": "theory", "subject": "CN", "room": "C116" },
+          "12:05": { "type": "theory", "subject": "CGIP", "room": "C116" },
+          "13:45": { "type": "theory", "subject": "RMIPR", "room": "C116" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C116" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C116" }
+        },
+        "Tuesday": {
+          "09:00": { "type": "theory", "subject": "Mini Project", "room": "C116" },
+          "09:55": { "type": "theory", "subject": "CN", "room": "C116" },
+          "11:10": { "type": "theory", "subject": "RMIPR", "room": "C116" },
+          "12:05": { "type": "theory", "subject": "EVS", "room": "C116" },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C116" },
+          "14:40": { "type": "theory", "subject": "Mini Project", "room": "C116" },
+          "15:35": { "type": "theory", "subject": "Mini Project", "room": "C116" }
+        },
+        "Wednesday": {
+          "09:00": { "type": "theory", "subject": "CDN", "room": "C116" },
+          "09:55": { "type": "theory", "subject": "CDN", "room": "C116" },
+          "11:10": { "type": "theory", "subject": "M&E", "room": "C116" },
+          "12:05": { "type": "theory", "subject": "CGIP", "room": "C116" },
+          "13:45": { "type": "theory", "subject": "Mini Project", "room": "C116" },
+          "14:40": { "type": "theory", "subject": "CGIP", "room": "C116" },
+          "15:35": { "type": "theory", "subject": "JAVA/UNIX", "room": "C116" }
+        },
+        "Thursday": {
+          "09:00": { "type": "theory", "subject": "RMIPR", "room": "C116" },
+          "09:55": { "type": "theory", "subject": "CN", "room": "C116" },
+          "11:10": { "type": "lab", "batches": { "D1": "C117", "D2": "C108" } },
+          "12:05": { "type": "lab", "batches": { "D1": "C117", "D2": "C108" } },
+          "13:45": { "type": "theory", "subject": "JAVA/UNIX", "room": "C116" },
+          "14:40": { "type": "lab", "batches": { "D1": "C108", "D3": "C117" } },
+          "15:35": { "type": "lab", "batches": { "D1": "C108", "D3": "C117" } }
+        },
+        "Friday": {
+          "09:00": { "type": "theory", "subject": "RMIPR", "room": "C116" },
+          "09:55": { "type": "theory", "subject": "EVS", "room": "C116" },
+          "11:10": { "type": "lab", "batches": { "D2": "C117", "D3": "C108" } },
+          "12:05": { "type": "lab", "batches": { "D2": "C117", "D3": "C108" } },
+          "13:45": { "type": "theory", "subject": "M&E", "room": "C116" },
+          "14:40": { "type": "theory", "subject": "CN", "room": "C116" }
+        },
+        "Saturday": {
+          "09:00": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C116" },
+          "09:55": { "type": "theory", "subject": "NSS/PE/YOGA", "room": "C116" }
+        }
+      }
+    }
+  },
+
+  "laboratories": {
+    "C117": "Network Programming Lab",
+    "C108": "Computer Graphics and Image Processing Lab"
+  }
+}
